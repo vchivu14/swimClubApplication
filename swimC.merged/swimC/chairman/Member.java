@@ -1,7 +1,7 @@
 package swimC.chairman;
 
-public class Member{
-
+public class Member {
+   static int no = 1;
    private int id;
    private String firstName;
    private String lastName;
@@ -13,6 +13,36 @@ public class Member{
    private int disciplineID;
    private int fees;
    private boolean behind = false;
+   
+   public Member() {
+      this.id = no;
+      no++;
+   }
+   
+   public void controlFees() {
+      this.fees = determineFee();
+   }
+   public int determineFee() {
+      int fees = 1000;
+      if (age > 18) {
+         fees += 600;
+      }
+      else {
+         fees = 500;
+      }
+      if (age >= 60) {
+         fees *= 0.75; 
+      }
+      return fees;        
+   }
+   
+   public boolean getBehind() {
+      return behind;
+   }
+   
+   public void setBehind(boolean b) {
+      this.behind = b;
+   }
    
    public int getID() {
       return id;
@@ -77,6 +107,6 @@ public class Member{
    public String toString(){
       return("ID: ["+id+"]\nName: "+firstName+" "+lastName+"\nAge: "+age+" \nE-mail Adress: "+email+
       "\nPhone Number: "+mobile+"\nIs the member active: "+isMemberActive+ " \nIs the member an elite swimmer: " 
-      +isMemberElite+"\n------------------------------------------");
+      +isMemberElite+" \nFees: "+fees+ " \nIs the member behind payment: " +behind+ "\n------------------------------------------");
 }
 }

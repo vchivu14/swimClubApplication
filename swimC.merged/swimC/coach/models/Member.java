@@ -86,6 +86,22 @@ public class Member {
       }
       return fees;        
    }
+   
+   
+   public int determineFee() {
+      int fees = 1000;
+      if (age > 18) {
+         fees += 600;
+      }
+      else {
+         fees = 500;
+      }
+      if (age >= 60) {
+         fees *= 0.75; 
+      }
+      return fees;        
+   }
+   
    public String getCoach() {
       return coach;
    }

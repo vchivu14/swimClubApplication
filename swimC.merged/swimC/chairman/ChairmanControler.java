@@ -42,6 +42,8 @@ public void readFromFile(ArrayList<Member> members){
                member.setEmail(fileInput.next());
                member.setIsMemberActive(fileInput.nextBoolean());
                member.setIsMemberElite(fileInput.nextBoolean());
+               member.setFees(fileInput.nextInt());
+               member.setBehind(fileInput.nextBoolean());
                members.add(member);
             }
          }catch(InputMismatchException b){
@@ -97,7 +99,7 @@ public void saveToFile(ArrayList<Member> members){
          
          myWriter.write(members.get(i).getID() +" "+members.get(i).getFirstName() + " " + members.get(i).getLastName() + " "
          + members.get(i).getAge() + " " +members.get(i).getMobile()+ " " + members.get(i).getEmail() + " " 
-         + members.get(i).getIsMemberActive() + " " + members.get(i).getIsMemberElite());
+         + members.get(i).getIsMemberActive() + " " + members.get(i).getIsMemberElite() + " " + members.get(i).getFees() + " " + members.get(i).getBehind());
          
          if(i!=members.size()-1){
             myWriter.write("\n");

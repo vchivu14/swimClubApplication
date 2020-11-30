@@ -37,7 +37,6 @@ public void printOutAllMembers(ArrayList<Member> members){
 
 public void addMember(ArrayList<Member> members, int i){
    Member member = new Member();
-   member.setID(i+1);
    System.out.print("\nFirst Name:");
    member.setFirstName(userInput.next());
    System.out.print("\nLast Name:");
@@ -70,10 +69,12 @@ public void addMember(ArrayList<Member> members, int i){
       answer1 = userInput.next();
       answer1 = answer1.toLowerCase();
       if(answer1.equals("y")){
-         member.setIsMemberActive(true);   
+         member.setIsMemberActive(true);
+         member.controlFees(); 
       }
       if(answer1.equals("n")){
          member.setIsMemberActive(false);
+         member.setFees(500);
       }       
    }while(!answer1.equals("y") && !answer1.equals("n"));
    
@@ -87,7 +88,8 @@ public void addMember(ArrayList<Member> members, int i){
       if(answer2.equals("n")){
          member.setIsMemberElite(false);
       }       
-   }while(!answer2.equals("y") && !answer2.equals("n"));
+   }
+   while(!answer2.equals("y") && !answer2.equals("n"));
    members.add(i, member);
 }
 
