@@ -9,21 +9,38 @@ public class exe {
 
    public static void main(String[] args) throws FileNotFoundException {
       
-      
+      boolean start = true;
+      while (start) {
       Scanner user = new Scanner(System.in);
-      
-      System.out.println("Choose a user: 1 or 2");
+      System.out.println("Choose a user: ");
+      System.out.println("<1> for Chairman, <2> for Treasurer, <3> for Coach");
+      System.out.println("<0> for Exit");
       int answer = user.nextInt();
       
-      // if authenticated as coach
       if (answer == 1) {
-         ProgramCoach.ON();
-      }
-      
-      else if (answer == 2) {
          ChairmanControler c = new ChairmanControler();
          c.chairman();
       }
+      
+      else if (answer == 2) {
+         System.out.println("Thunderstruck!!");
+      }
+      
+      else if (answer == 3) {
+         ProgramCoach.ON();
+      }
+      else if (answer == 0) {
+         System.out.println();
+         System.out.println("Goodbye");
+         break;
+      }
+      else {
+         System.out.println("Not a real option really");
+         continue;
+      }
+      
+      }
+      
  
    }
 }
