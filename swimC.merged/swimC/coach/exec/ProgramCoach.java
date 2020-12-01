@@ -263,13 +263,6 @@ public class ProgramCoach {
                }
                if (swimmers.size() > 0) {
                option = Coach.chooseSwimmer();
-//                boolean s;
-//                if ((option) instanceOf) Integer)) {
-//                   s = true;
-//                }
-//                if (isInteger(option)) {
-//                   s = true;
-//                }
 
                if (option == 0) {
                   System.out.println();

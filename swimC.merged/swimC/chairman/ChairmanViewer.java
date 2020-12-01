@@ -10,11 +10,19 @@ import java.util.Scanner;
 
 import swimC.coach.models.Swimmer;
 
-
-
 public class ChairmanViewer {
    Scanner userInput = new Scanner(System.in);
    String answer;
+   
+   public void addSwimmer(Member member) throws IOException {
+      Swimmer swimmer = new Swimmer(member);
+      Writer output;
+      output = new BufferedWriter(new FileWriter("swimmers.txt"));  //clears file every time
+      System.out.println(swimmer.toString());
+      output.append(swimmer.toString());
+      output.close();
+   }
+   
 
    public void menu(ArrayList<Member> members) {
       listMessege();
@@ -95,10 +103,7 @@ public class ChairmanViewer {
       Writer output;
       if(answer2.equals("y")){
          member.setIsMemberElite(true);
-         Swimmer swimmer = new Swimmer(member);
-         output = new BufferedWriter(new FileWriter("swimmers.txt"));  //clears file every time
-         output.append(swimmer.toString());
-         output.close();
+         addSwimmer(member);
       }
       if(answer2.equals("n")){
          member.setIsMemberElite(false);
