@@ -1,7 +1,7 @@
 package swimC.coach.controllers;
 
-import swimC.coach.models.*;
-import swimC.coach.views.*;
+import swimC.coach.models.Swimmer;
+import swimC.coach.views.SwimmerView;
 
 public class SwimmerController {
    private Swimmer model;
@@ -18,16 +18,22 @@ public class SwimmerController {
    public void setSwimmerID(int id) {
       model.setID(id);
    }
-   public String getSwimmerName() {
-      return model.getName();
+   public String getSwimmerFirstName() {
+      return model.getFirstName();
    }
-   public void setSwimmerName(String name) {
-      model.setName(name);
+   public void setSwimmerFirstName(String name) {
+      model.setFirstName(name);
    }
-   public int getSwimmerMobile() {
+   public String getSwimmerLastName() {
+      return model.getLastName();
+   }
+   public void setSwimmerLastName(String name) {
+      model.setLastName(name);
+   }
+   public String getSwimmerMobile() {
       return model.getMobile();
    }
-   public void setSwimmerMobile(int mobile) {
+   public void setSwimmerMobile(String mobile) {
       model.setMobile(mobile);
    }
    public int getSwimmerAge() {
@@ -49,7 +55,7 @@ public class SwimmerController {
       model.setCoach(coach);
    }
    public void updateView() {
-      view.printSwimmerDetails(model.getID(), model.getName(), model.getMobile(), model.getAge(),
+      view.printSwimmerDetails(model.getID(), model.getFirstName(), model.getLastName(), model.getMobile(), model.getAge(),
                                  model.getDiscipline(), model.getCoach());
    }
 }

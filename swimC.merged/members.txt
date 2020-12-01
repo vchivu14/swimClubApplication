@@ -1,1 +1,10 @@
 1 King Ragnar 20 4444555 gm true false 1600 false
+1 King Ragnar 20 4444555 gm true false 1600 false
+1 King Ragnar 20 4444555 gm true false 1600 false
+1 King Ragnar 20 4444555 gm true false 1600 false
+5 King Harold 44 6667778 gm true true 1600 false
+6 King Oslo 55 5555666 gm true true 1600 false
+7 King Stap 17 5555666 gm true true 500 false
+9 Monty Python 17 6667777 gm true true 1000 false
+11 Old F 50 6666777 gm false false 500 false
+12 young notactive 17 6666777 gm false false 500 false

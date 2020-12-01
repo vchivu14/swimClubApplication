@@ -1,7 +1,7 @@
 package swimC.coach.controllers;
 
-import swimC.coach.models.*;
-import swimC.coach.views.*;
+import swimC.chairman.Member;
+import swimC.coach.views.MemberView;
 
 public class MemberController {
    private Member model;
@@ -12,17 +12,23 @@ public class MemberController {
       this.view = view;
    }
    
-   public int getMemberID() {
+   public int getID() {
       return model.getID();
    }
-   public void setMemberID(int id) {
+   public void setID(int id) {
       model.setID(id);
    }
-   public String getMemberName() {
-      return model.getName();
+   public String getFirstName() {
+      return model.getFirstName();
    }
-   public void setMemberName(String name) {
-      model.setName(name);
+   public void setFirstName(String name) {
+      model.setFirstName(name);
+   }
+   public String getLastName() {
+      return model.getLastName();
+   }
+   public void setLastName(String name) {
+      model.setLastName(name);
    }
    public String getMemberEmail() {
       return model.getEmail();
@@ -30,10 +36,10 @@ public class MemberController {
    public void setMemberEmail(String email) {
       model.setEmail(email);
    }
-   public int getMemberMobile() {
+   public String getMemberMobile() {
       return model.getMobile();
    }
-   public void setMemberMobile(int mobile) {
+   public void setMemberMobile(String mobile) {
       model.setMobile(mobile);
    }
    public int getMemberAge() {
@@ -42,17 +48,17 @@ public class MemberController {
    public void setMemberAge(int age) {
       model.setAge(age);
    }
-   public int getMemberStatus() {
-      return model.getStatus();
+   public boolean getMemberStatus() {
+      return model.getIsMemberActive();
    }
-   public void setMemberStatus(int status) {
-      model.setStatus(status);
+   public void setMemberStatus(boolean status) {
+      model.setIsMemberActive(status);
    }
-   public int getMemberType() {
-      return model.getType();
+   public boolean getMemberType() {
+      return model.getIsMemberElite();
    }
-   public void setMemberType(int type) {
-      model.setType(type);
+   public void setMemberType(boolean status) {
+      model.setIsMemberElite(status);
    }
    public int getMemberFees() {
       return model.getFees();
@@ -66,15 +72,15 @@ public class MemberController {
    public void setMemberDiscipline(int discipline) {
       model.setDiscipline(discipline);
    }
-   public String getMemberCoach() {
-      return model.getCoach();
+   public boolean getMemberBehind() {
+      return model.getBehind();
    }
-   public void setMemberCoach(String coach) {
-      model.setCoach(coach);
+   public void setMemberBehind(boolean behind) {
+      model.setBehind(behind);
    }
+   
    public void updateView() {
-      view.printMemberDetails(model.getID(), model.getName(), model.getEmail(), model.getMobile(), model.getAge(),
-                              model.getStatus(), model.getType(), model.getDiscipline(), model.getFees(),
-                              model.getCoach(), model.getBehind());
+      view.printMemberDetails(model.getID(), model.getFirstName(), model.getLastName(), model.getEmail(), model.getMobile(), model.getAge(),
+                              model.getIsMemberActive(), model.getIsMemberElite(), model.getDiscipline(), model.getFees(), model.getBehind());
    }
 }

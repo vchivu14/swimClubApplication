@@ -1,41 +1,51 @@
 package swimC.chairman;
 
-import java.io.*;
-import java.util.*;
-public class ChairmanViewer{
-Scanner userInput = new Scanner(System.in); 
-String answer;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-public void menu(ArrayList<Member> members){
-   listMessege();
-   printOutAllMembers(members);
-   menuMessege();
-   askForAnswer();
+import swimC.coach.models.Swimmer;
 
-}
 
-public void askForAnswer(){
-   answer = userInput.next();
-   answer = answer.toLowerCase();
-   if(!answer.equals("a") && !answer.equals("d") && !answer.equals("q") && !answer.equals("e")){
-      invalidInputExtended();
+
+public class ChairmanViewer {
+   Scanner userInput = new Scanner(System.in);
+   String answer;
+
+   public void menu(ArrayList<Member> members) {
+      listMessege();
+      printOutAllMembers(members);
       menuMessege();
       askForAnswer();
-   }  
-}
 
-public String getAnswer(){
-   return answer;
-}
-
-public void printOutAllMembers(ArrayList<Member> members){
-   for(int i = 0; i<members.size(); i++){
-      System.out.println(members.get(i));
    }
-   System.out.println();
-}
 
-public void addMember(ArrayList<Member> members, int i){
+   public void askForAnswer() {
+      answer = userInput.next();
+      answer = answer.toLowerCase();
+      if (!answer.equals("a") && !answer.equals("d") && !answer.equals("q") && !answer.equals("e")) {
+         invalidInputExtended();
+         menuMessege();
+         askForAnswer();
+      }
+   }
+
+   public String getAnswer() {
+      return answer;
+   }
+
+   public void printOutAllMembers(ArrayList<Member> members) {
+      for (int i = 0; i < members.size(); i++) {
+         System.out.println(members.get(i));
+      }
+      System.out.println();
+   }
+
+   public void addMember(ArrayList<Member> members, int i) throws IOException {
    Member member = new Member();
    System.out.print("\nFirst Name:");
    member.setFirstName(userInput.next());
@@ -82,15 +92,20 @@ public void addMember(ArrayList<Member> members, int i){
       eliteMemberMessege();
       answer2 = userInput.next();
       answer2 = answer2.toLowerCase();
+      Writer output;
       if(answer2.equals("y")){
-         member.setIsMemberElite(true);   
+         member.setIsMemberElite(true);
+         Swimmer swimmer = new Swimmer(member);
+         output = new BufferedWriter(new FileWriter("swimmers.txt"));  //clears file every time
+         output.append(swimmer.toString());
+         output.close();
       }
       if(answer2.equals("n")){
          member.setIsMemberElite(false);
       }       
    }
    while(!answer2.equals("y") && !answer2.equals("n"));
-   members.add(i, member);
+   members.add(i, member); 
 }
 
 public void deleteMember(ArrayList<Member> members){

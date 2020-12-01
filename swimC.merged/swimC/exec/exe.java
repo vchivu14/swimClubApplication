@@ -7,7 +7,7 @@ import java.util.*;
 
 public class exe {
 
-   public static void main(String[] args) throws FileNotFoundException {
+   public static void main(String[] args) throws IOException {
       
       boolean start = true;
       while (start) {

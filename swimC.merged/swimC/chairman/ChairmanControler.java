@@ -1,12 +1,13 @@
 package swimC.chairman;
 
+import java.io.IOException;
 import java.io.*;
 import java.util.*;
 public class ChairmanControler{
 ChairmanViewer viewer = new ChairmanViewer();
 public static ArrayList<Member> members = new ArrayList<Member>();
 File membersFile = new File("members.txt");
-public void chairman(){
+public void chairman()throws IOException{
    readFromFile(members);
    do{
    viewer.menu(members);
@@ -57,7 +58,7 @@ public void readFromFile(ArrayList<Member> members){
 this.members=members;
 }
 
-public void choice(ArrayList<Member> members, String answer){
+public void choice(ArrayList<Member> members, String answer) throws IOException {
    switch(answer){
       case "a":{
          viewer.addMember(members, members.size());

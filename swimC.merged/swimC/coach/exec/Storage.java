@@ -1,6 +1,7 @@
 package swimC.coach.exec;
 
 import swimC.coach.models.*;
+import swimC.chairman.Member;
 import java.util.*;
 import java.io.*;
 
@@ -48,22 +49,22 @@ public class Storage {
 
    public static void connectD() {
       try {
-         inputMS = new Scanner(new File("membersV.txt"));
+         inputMS = new Scanner(new File("members.txt"));
          while (inputMS.hasNextLine()) {
             String s = inputMS.nextLine();
             line = new Scanner(s);   
             if (line.hasNext()) {
                member = new Member();
                member.setID(line.nextInt());
-               member.setName(line.next());
+               member.setFirstName(line.next());
+               member.setLastName(line.next());
                member.setEmail(line.next());
-               member.setMobile(line.nextInt());
+               member.setMobile(line.next());
                member.setAge(line.nextInt());
-               member.setStatus(line.nextInt());
-               member.setType(line.nextInt());
+               member.setIsMemberActive(line.nextBoolean());
+               member.setIsMemberElite(line.nextBoolean());
                member.setDiscipline(line.nextInt());
                member.setFees(line.nextInt());
-               member.setCoach(line.next());
                member.setBehind(line.nextBoolean());
                members.add(member);
             }
@@ -83,8 +84,9 @@ public class Storage {
             if (line.hasNext()) {
                swimmer = new Swimmer();
                swimmer.setID(line.nextInt());
-               swimmer.setName(line.next());
-               swimmer.setMobile(line.nextInt());
+               swimmer.setFirstName(line.next());
+               swimmer.setLastName(line.next());
+               swimmer.setMobile(line.next());
                swimmer.setAge(line.nextInt());
                swimmer.setDiscipline(line.nextInt());
                swimmer.setCoach(line.next());

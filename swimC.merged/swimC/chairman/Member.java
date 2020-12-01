@@ -27,9 +27,6 @@ public class Member {
       if (age > 18) {
          fees += 600;
       }
-      else {
-         fees = 500;
-      }
       if (age >= 60) {
          fees *= 0.75; 
       }
@@ -104,6 +101,7 @@ public class Member {
    public void setFees(int fees) {
       this.fees = fees;
    }
+
    public String toString(){
       return("ID: ["+id+"]\nName: "+firstName+" "+lastName+"\nAge: "+age+" \nE-mail Adress: "+email+
       "\nPhone Number: "+mobile+"\nIs the member active: "+isMemberActive+ " \nIs the member an elite swimmer: " 

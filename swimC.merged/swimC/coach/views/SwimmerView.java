@@ -1,10 +1,11 @@
 package swimC.coach.views;
 
 public class SwimmerView {
-   public void printSwimmerDetails(int SwimmerID, String SwimmerName, int SwimmerMobile, int SwimmerAge,
+   public void printSwimmerDetails(int SwimmerID, String SwimmerFirstName, String SwimmerLastName, String SwimmerMobile, int SwimmerAge,
                                     int SwimmerDiscipline, String SwimmerCoach) {
       System.out.println("Swimmer ID: " + SwimmerID);
-      System.out.println("Name: " + SwimmerName);
+      System.out.println("Name: " + SwimmerFirstName);
+      System.out.println("Name: " + SwimmerLastName);
       System.out.println("Phone: " + SwimmerMobile);
       System.out.println("Age: " + SwimmerAge);
       String s = "";

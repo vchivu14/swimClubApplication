@@ -1,5 +1,6 @@
 package swimC.coach.exec;
 
+import swimC.chairman.Member;
 import swimC.coach.models.*;
 import swimC.coach.views.*;
 import swimC.coach.controllers.*;
@@ -260,13 +261,22 @@ public class ProgramCoach {
                   controller = new SwimmerController(model, view);
                   controller.updateView();
                }
+               if (swimmers.size() > 0) {
                option = Coach.chooseSwimmer();
+//                boolean s;
+//                if ((option) instanceOf) Integer)) {
+//                   s = true;
+//                }
+//                if (isInteger(option)) {
+//                   s = true;
+//                }
+
                if (option == 0) {
                   System.out.println();
                   System.out.println("Changes saved!");
                   break;
                }
-               else {
+               else if (option <= swimmers.size()) {
                   try {
                      model = retrieveSwimmerFromDatabase(option);
                      controller = new SwimmerController(model, view);
@@ -341,6 +351,20 @@ public class ProgramCoach {
                      break;
                   }
                }
+               
+//                else if (!s) {
+//                   System.out.println("Not a real Option!");
+//                   break;
+//                }
+               else {
+                  System.out.println("Not a real Option!");
+                  break;
+               }
+            }
+            else {
+              System.out.println("No swimmers here!");
+              break; 
+            }
             }
             
          }
