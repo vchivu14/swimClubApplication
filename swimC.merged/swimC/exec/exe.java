@@ -9,7 +9,7 @@ public class exe {
 
    static Scanner user;
    public static void main(String[] args) throws IOException {
-      
+     
       boolean start = true;
       while (start) {
       user = new Scanner(System.in);

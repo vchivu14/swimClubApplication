@@ -39,6 +39,12 @@ public class CoachView {
       }
       catch (Exception e) {
          System.out.println("...");
+         System.out.println("Not a real option!");
+      }
+      if (option == (int) option) {
+         System.out.println();
+      } else {
+         option = -1;
       }
       return option;    
    }
@@ -54,6 +60,12 @@ public class CoachView {
       }
       catch (Exception e) {
          System.out.println("...");
+         System.out.println("Not a real option!");
+      }
+      if (option == (int) option) {
+         System.out.println();
+      } else {
+         option = -1;
       }
       return option;   
    }
@@ -69,10 +81,14 @@ public class CoachView {
       }
       catch (Exception e) {
          System.out.println("...");
-         System.out.println("Not the expected input");
-         System.out.println("There is no Discipline with this ID");
+         System.out.println("Not a real option!");
       }
-      return option;   
+      if (option == (int) option) {
+         System.out.println();
+      } else {
+         option = -1;
+      }
+      return option;     
    }
    
    public static String saveChanges() {

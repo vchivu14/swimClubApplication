@@ -131,10 +131,10 @@ public class ProgramCoach {
         competitionResults = Storage.getCompetitionResultsLists();
     }
 
-    private static Swimmer retrieveSwimmerFromDatabase(int option) {
+    private static Swimmer retrieveSwimmerFromDatabase(int swimmerID) {
         for (int i = 0; i < swimmers.size(); i++) {
             swimmer = swimmers.get(i);
-            if (swimmer.getID() == option) {
+            if (swimmer.getID() == swimmerID) {
                 break;
             } else {
                 continue;
@@ -143,10 +143,10 @@ public class ProgramCoach {
         return swimmer;
     }
 
-    private static Competition retrieveCompetitionFromDatabase(int option) {
+    private static Competition retrieveCompetitionFromDatabase(int competitionID) {
         for (int i = 0; i < competitions.size(); i++) {
             competition = competitions.get(i);
-            if (competition.getID() == option) {
+            if (competition.getID() == competitionID) {
                 break;
             } else {
                 continue;
@@ -155,35 +155,25 @@ public class ProgramCoach {
         return competition;
     }
 
-    private static Member retrieveMemberFromDatabase(int option) {
-        for (int i = 0; i < members.size(); i++) {
-            member = members.get(i);
-            if (member.getID() == option) {
-                break;
-            } else {
-                continue;
-            }
-        }
-        return member;
-    }
-
-    private static Discipline retrieveDisciplineFromDatabase(int option) {
-        for (int i = 0; i < disciplines.size(); i++) {
-            discipline = disciplines.get(i);
-            if (discipline.getID() == option) {
-                break;
-            } else {
-                continue;
-            }
-        }
-        return discipline;
-    }
-
-    private static boolean verifyIDDiscipline(int option) {
+    private static boolean verifyIDDiscipline(int disciplineID) {
         boolean status = false;
         for (int i = 0; i < disciplines.size(); i++) {
             discipline = disciplines.get(i);
-            if (discipline.getID() == option) {
+            if (discipline.getID() == disciplineID) {
+                status = true;
+                break;
+            } else {
+                continue;
+            }
+        }
+        return status;
+    }
+    
+    private static boolean verifyIDSwimmer(int swimmerID) {
+        boolean status = false;
+        for (int i = 0; i < swimmers.size(); i++) {
+            swimmer = swimmers.get(i);
+            if (swimmer.getID() == swimmerID) {
                 status = true;
                 break;
             } else {
@@ -222,6 +212,21 @@ public class ProgramCoach {
         competitionResult = competitionResults.get(i);
         return competitionResult;
     }
+    
+    private static Discipline retrieveDiscipline(int i) {
+        discipline = disciplines.get(i);
+        return discipline;
+    }
+    
+    private static Member retrieveMember(int i) {
+        member = members.get(i);
+        return member;
+    }
+    
+    private static Competition retrieveCompetition(int i) {
+        competition = competitions.get(i);
+        return competition;
+    }
 
     public static void ON() {
         program = true;
@@ -237,10 +242,21 @@ public class ProgramCoach {
         DisciplineView view = new DisciplineView();
         DisciplineController controller;
         for (int i = 0; i < disciplines.size(); i++) {
-            model = retrieveDisciplineFromDatabase(i);
+            model = retrieveDiscipline(i);
             controller = new DisciplineController(model, view);
             controller.updateView();
         }
+    }
+    
+    public static void showSwimmers() {
+      Swimmer model;
+            SwimmerView view = new SwimmerView();
+            SwimmerController controller;
+            for (int i = 0; i < swimmers.size(); i++) {
+                model = retrieveSwimmerFromDatabase(i);
+                controller = new SwimmerController(model, view);
+                controller.updateView();
+            }
     }
 
     public static void showMembers() {
@@ -248,7 +264,7 @@ public class ProgramCoach {
         MemberView view = new MemberView();
         MemberController controller;
         for (int i = 0; i < members.size(); i++) {
-            model = retrieveMemberFromDatabase(i);
+            model = retrieveMember(i);
             controller = new MemberController(model, view);
             controller.updateView();
         }
@@ -261,7 +277,7 @@ public class ProgramCoach {
             CompetitionView view = new CompetitionView();
             CompetitionController controllerC;
             for (int i = 0; i < competitions.size(); i++) {
-                model = retrieveCompetitionFromDatabase(i);
+                model = retrieveCompetition(i);
                 controllerC = new CompetitionController(model, view);
                 controllerC.updateView();
             }
@@ -285,10 +301,18 @@ public class ProgramCoach {
             System.out.println("Not a real Option!");
         }
     }
-
+   
+    static int swimmerID;
+    static int competitionID;
+   
     public static void manageSwimmer() {
         boolean finding = false;
         while (!finding) {
+                  
+            
+            
+            if (swimmers.size() > 0) {
+            
             Swimmer model;
             SwimmerView view = new SwimmerView();
             SwimmerController controller;
@@ -297,19 +321,18 @@ public class ProgramCoach {
                 controller = new SwimmerController(model, view);
                 controller.updateView();
             }
-            int swimmerID = CoachView.chooseSwimmer();
-            if (swimmers.size() > 0) {
+            swimmerID = CoachView.chooseSwimmer();
+               
                 if (swimmerID == 0) {
                     System.out.println();
                     System.out.println("Now going back...");
                     break;
-                } else if (swimmerID <= swimmers.size()) {
+                } else if (swimmerID != -1 && swimmerID <= swimmers.size())  {
                     try {
                         model = retrieveSwimmerFromDatabase(swimmerID);
                         controller = new SwimmerController(model, view);
                         controller.updateView();
                     } catch (Exception e) {
-                        System.out.println("No Swimmer by that ID..");
                         break;
                     }
                     
@@ -323,9 +346,15 @@ public class ProgramCoach {
                            System.out.println("Now going back...");
                            break;
                         }
-                        else if (disciplineID <= disciplines.size() && verifyIDDiscipline(disciplineID)) {
+                        else if (disciplineID != -1 && disciplineID <= disciplines.size()) {
                            controller.setSwimmerDiscipline(disciplineID);
                            controller.updateView();
+                        }
+                        else if (disciplineID == -1) {
+                           System.out.println("Something went wrong!");
+                    System.out.println("----------------------");
+                    System.out.println("Let's try again!");
+                    System.out.println();
                         }
                         else {
                            System.out.println("No Discipline found!");
@@ -351,12 +380,20 @@ public class ProgramCoach {
                     } else {
                         break;
                     }
-                } else {
-                    System.out.println("No Swimmer by that ID!");
-                    break;
+                } 
+                else if (swimmerID == -1) {
+                    System.out.println("Something went wrong!");
+                    System.out.println("----------------------");
+                    System.out.println("Let's try again!");
+                    System.out.println();
+                    continue;
+                }
+                else {
+                    System.out.println("No Swimmer by that ID..");
+                    System.out.println(); 
                 }
             } else {
-                System.out.println("No swimmers here!");
+                System.out.println("No Swimmers here...");
                 break;
             }
         }
@@ -369,25 +406,28 @@ public class ProgramCoach {
             CompetitionView view = new CompetitionView();
             CompetitionController controllerC;
             for (int i = 0; i < competitions.size(); i++) {
-                model = retrieveCompetitionFromDatabase(i);
+                model = retrieveCompetition(i);
                 controllerC = new CompetitionController(model, view);
                 controllerC.updateView();
             }
 
             if (disciplines.size() > 0) {
-                int option = CoachView.chooseCompetition();
-
-                if (option == 0) {
+                competitionID = CoachView.chooseCompetition();
+                
+                if (competitionID == 0) {
                     System.out.println();
+                    System.out.println("Now going back...");
                     break;
-                } else if (option <= competitions.size()) {
+                } 
+
+                if (competitionID <= competitions.size() && competitionID != -1) {
 
                     try {
-                        model = retrieveCompetitionFromDatabase(option);
+                        model = retrieveCompetitionFromDatabase(competitionID);
                         controllerC = new CompetitionController(model, view);
                         controllerC.updateView();
                     } catch (Exception e) {
-                        System.out.println("No Competition by that ID..");
+                        
                         break;
                     }
 
@@ -411,6 +451,7 @@ public class ProgramCoach {
                             continue;
                         } else {
                             System.out.println("No Competition List Found...");
+                            System.out.println();
                         }
                         break;
                     }
@@ -422,9 +463,18 @@ public class ProgramCoach {
                     } else {
                         break;
                     }
-                } else {
-                    System.out.println("No competitions found!");
-                    break;
+                }
+                else if (competitionID == -1) {
+                  System.out.println("Something went wrong!");
+                    System.out.println("----------------------");
+                    System.out.println("Let's try again!");
+                    System.out.println();
+                    continue;
+                } 
+                else {
+                  System.out.println("No Competition by that ID..");
+                  System.out.println();
+                   continue; 
                 }
             }
             else {
@@ -455,12 +505,14 @@ public class ProgramCoach {
             controller.updateView();
         }
     }
-
+   
+    private static int option;
+   
     public static void menu() {
         exec();
 
         while (program) {
-            int option = CoachView.startMenu();
+            option = CoachView.startMenu();
 
             if (option == 1) {
                 showMembers();
