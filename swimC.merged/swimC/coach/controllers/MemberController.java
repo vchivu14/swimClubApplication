@@ -69,9 +69,6 @@ public class MemberController {
    public int getMemberDiscipline() {
       return model.getDiscipline();
    }
-   public void setMemberDiscipline(int discipline) {
-      model.setDiscipline(discipline);
-   }
    public boolean getMemberBehind() {
       return model.getBehind();
    }
@@ -81,6 +78,6 @@ public class MemberController {
    
    public void updateView() {
       view.printMemberDetails(model.getID(), model.getFirstName(), model.getLastName(), model.getEmail(), model.getMobile(), model.getAge(),
-                              model.getIsMemberActive(), model.getIsMemberElite(), model.getDiscipline(), model.getFees(), model.getBehind());
+                              model.getIsMemberActive(), model.getIsMemberElite(), model.getFees(), model.getBehind());
    }
 }

@@ -1,10 +1,1 @@
-1 King Ragnar 30 6666667 gm true true 1600 false
-3 Young Ragnar 17 6666667 gm true true 1000 false
-5 Old Ragnar 61 6666667 gm true false 1200 false
-6 Old Ragnar 60 6666667 gm false true 500 false
-5 Test User 23 5555556 gm false false 500 false
-6 Test User2 60 5555666 gm false true 500 false
-7 Test User3 17 5555666 gm true true 1000 false
-8 Test User3 22 5556667 gm false true 500 false
-9 test user4 34 6667776 gm true true 1600 false
-10 test user5 19 5555666 gm true true 1600 false
+1 King Ragnar 18 4445556 gm true true 1000 false

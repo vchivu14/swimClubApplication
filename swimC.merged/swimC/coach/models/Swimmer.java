@@ -18,28 +18,30 @@ public class Swimmer extends Member {
    public void setCoach(String s) {
       this.coach = s;
    }
+   
+   public int getDisciplineID() {
+      return disciplineID;
+   }
+
+   public void setDisciplineID(int i) {
+      this.disciplineID = i;
+   }
 
    public Swimmer(Member member) {
-      this.ID = member.getID()-1;
+      this.ID = member.getID();
       this.firstName = member.getFirstName();
       this.lastName = member.getLastName();
       this.mobile = member.getMobile();
       this.age = member.getAge();
-      this.disciplineID = member.getDiscipline();
       this.coach = "Zidane";
    }
    
    public Swimmer() {
       
    }
-
-//    public String toString() {
-//       return super.getID() + " " + super.getFirstName() + " " + super.getLastName() + " " + super.getMobile() + " " + 
-//              super.getAge() + " " + super.getDiscipline() + " " + getCoach() + "\n";
-//    }
    
    public String toString() {
-      return this.ID + " " + this.firstName + " " + lastName + " " + mobile + " " + 
+      return ID + " " + firstName + " " + lastName + " " + mobile + " " + 
              age + " " + disciplineID + " " + getCoach() + "\n";
    }
    

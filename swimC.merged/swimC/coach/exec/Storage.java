@@ -5,8 +5,8 @@ import swimC.chairman.Member;
 import java.util.*;
 import java.io.*;
 
-public class Storage {   
-   
+public class Storage {
+
    private static Member member;
    private static ArrayList<Member> members = new ArrayList<Member>();
    private static Swimmer swimmer;
@@ -24,63 +24,75 @@ public class Storage {
 
    static Scanner inputMS;
    static Scanner line;
-   
+
    public static ArrayList<Member> getMembers() {
       return members;
    }
+
    public static ArrayList<Swimmer> getSwimmers() {
       return swimmers;
    }
+
    public static ArrayList<Discipline> getDisciplines() {
       return disciplines;
    }
+
    public static ArrayList<Competition> getCompetitions() {
       return competitions;
    }
+
    public static ArrayList<CompetitionList> getCompetitionLists() {
       return competitionLists;
    }
+
    public static ArrayList<TrainingResult> getTrainingResultsLists() {
       return trainingResults;
    }
+
    public static ArrayList<CompetitionResult> getCompetitionResultsLists() {
       return competitionResults;
    }
 
+   private static File filepathMembers = new File("./members.txt");
+   private static File filepathSwimmers = new File("./swimmers.txt");
+   private static File filepathDisciplines  = new File("./disciplines.txt");
+   private static File filepathCompetition  = new File("./competitions.txt");
+   private static File filepathCompetitionLists = new File("./competitionLists.txt");
+   private static File filepathTrainingResults = new File("./trainingResults.txt");
+   private static File filepathCompetitionResults = new File("./competitionResults.txt");
+ 
+
    public static void connectD() {
       try {
-         inputMS = new Scanner(new File("members.txt"));
+         inputMS = new Scanner(filepathMembers);
          while (inputMS.hasNextLine()) {
             String s = inputMS.nextLine();
-            line = new Scanner(s);   
+            line = new Scanner(s);
             if (line.hasNext()) {
                member = new Member();
                member.setID(line.nextInt());
                member.setFirstName(line.next());
                member.setLastName(line.next());
-               member.setEmail(line.next());
-               member.setMobile(line.next());
                member.setAge(line.nextInt());
+               member.setMobile(line.next());
+               member.setEmail(line.next());
                member.setIsMemberActive(line.nextBoolean());
                member.setIsMemberElite(line.nextBoolean());
-               member.setDiscipline(line.nextInt());
                member.setFees(line.nextInt());
                member.setBehind(line.nextBoolean());
                members.add(member);
             }
          }
          inputMS.close();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
          System.out.println("File not Found");
       }
-   
-   
+
       try {
-         inputMS = new Scanner(new File("swimmers.txt"));
+         inputMS = new Scanner(filepathSwimmers);
          while (inputMS.hasNextLine()) {
             String s = inputMS.nextLine();
-            line = new Scanner(s);   
+            line = new Scanner(s);
             if (line.hasNext()) {
                swimmer = new Swimmer();
                swimmer.setID(line.nextInt());
@@ -88,22 +100,21 @@ public class Storage {
                swimmer.setLastName(line.next());
                swimmer.setMobile(line.next());
                swimmer.setAge(line.nextInt());
-               swimmer.setDiscipline(line.nextInt());
+               swimmer.setDisciplineID(line.nextInt());
                swimmer.setCoach(line.next());
                swimmers.add(swimmer);
             }
          }
          inputMS.close();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
          System.out.println("File not Found");
       }
-      
+
       try {
-         inputMS = new Scanner(new File("disciplines.txt"));
+         inputMS = new Scanner(filepathDisciplines);
          while (inputMS.hasNextLine()) {
             String s = inputMS.nextLine();
-            line = new Scanner(s);   
+            line = new Scanner(s);
             if (line.hasNext()) {
                discipline = new Discipline();
                discipline.setID(line.nextInt());
@@ -111,17 +122,16 @@ public class Storage {
                disciplines.add(discipline);
             }
          }
-      inputMS.close();
-      }
-      catch (Exception e) {
+         inputMS.close();
+      } catch (Exception e) {
          System.out.println("File not Found");
       }
-      
+
       try {
-         inputMS = new Scanner(new File("competitions.txt"));
+         inputMS = new Scanner(filepathCompetition);
          while (inputMS.hasNextLine()) {
             String s = inputMS.nextLine();
-            line = new Scanner(s);   
+            line = new Scanner(s);
             if (line.hasNext()) {
                competition = new Competition();
                competition.setID(line.nextInt());
@@ -129,17 +139,16 @@ public class Storage {
                competitions.add(competition);
             }
          }
-      inputMS.close();
-      }
-      catch (Exception e) {
+         inputMS.close();
+      } catch (Exception e) {
          System.out.println("File not Found");
       }
-      
+
       try {
-         inputMS = new Scanner(new File("competitionLists.txt"));
+         inputMS = new Scanner(filepathCompetitionLists);
          while (inputMS.hasNextLine()) {
             String s = inputMS.nextLine();
-            line = new Scanner(s);   
+            line = new Scanner(s);
             if (line.hasNext()) {
                competitionList = new CompetitionList();
                competitionList.setID(line.nextInt());
@@ -150,17 +159,16 @@ public class Storage {
                competitionLists.add(competitionList);
             }
          }
-      inputMS.close();
-      }
-      catch (Exception e) {
+         inputMS.close();
+      } catch (Exception e) {
          System.out.println("File not Found");
       }
-      
+
       try {
-         inputMS = new Scanner(new File("trainingResults.txt"));
+         inputMS = new Scanner(filepathTrainingResults);
          while (inputMS.hasNextLine()) {
             String s = inputMS.nextLine();
-            line = new Scanner(s);   
+            line = new Scanner(s);
             if (line.hasNext()) {
                trainingResult = new TrainingResult();
                trainingResult.setID(line.nextInt());
@@ -171,17 +179,16 @@ public class Storage {
                trainingResults.add(trainingResult);
             }
          }
-      inputMS.close();
-      }
-      catch (Exception e) {
+         inputMS.close();
+      } catch (Exception e) {
          System.out.println("File not Found");
       }
-      
+
       try {
-         inputMS = new Scanner(new File("competitionResults.txt"));
+         inputMS = new Scanner(filepathCompetitionResults);
          while (inputMS.hasNextLine()) {
             String s = inputMS.nextLine();
-            line = new Scanner(s);   
+            line = new Scanner(s);
             if (line.hasNext()) {
                competitionResult = new CompetitionResult();
                competitionResult.setID(line.nextInt());
@@ -194,13 +201,11 @@ public class Storage {
                competitionResults.add(competitionResult);
             }
          }
-      inputMS.close();
-      }
-      catch (Exception e) {
+         inputMS.close();
+      } catch (Exception e) {
          System.out.println("File not Found");
-      }    
- 
+      }
 
    }
-   
+
 }

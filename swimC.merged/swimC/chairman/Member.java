@@ -92,9 +92,6 @@ public class Member {
    public int getDiscipline() {
       return disciplineID;
    }
-   public void setDiscipline(int discipline) {
-      this.disciplineID = disciplineID;
-   }
    public int getFees() {
       return fees;
    }
@@ -105,6 +102,6 @@ public class Member {
    public String toString(){
       return("ID: ["+id+"]\nName: "+firstName+" "+lastName+"\nAge: "+age+" \nE-mail Adress: "+email+
       "\nPhone Number: "+mobile+"\nIs the member active: "+isMemberActive+ " \nIs the member an elite swimmer: " 
-      +isMemberElite+" \nFees: "+fees+ " \nIs the member behind payment: " +behind+ "\n------------------------------------------");
+      +isMemberElite+ " \nFees: " +fees+ " \nIs the member behind payment: " +behind+ "\n------------------------------------------");
 }
 }

@@ -43,10 +43,10 @@ public class SwimmerController {
       model.setAge(age);
    }
    public int getSwimmerDiscipline() {
-      return model.getDiscipline();
+      return model.getDisciplineID();
    }
    public void setSwimmerDiscipline(int discipline) {
-      model.setDiscipline(discipline);
+      model.setDisciplineID(discipline);
    }
    public String getSwimmerCoach() {
       return model.getCoach();
@@ -56,6 +56,6 @@ public class SwimmerController {
    }
    public void updateView() {
       view.printSwimmerDetails(model.getID(), model.getFirstName(), model.getLastName(), model.getMobile(), model.getAge(),
-                                 model.getDiscipline(), model.getCoach());
+                                 model.getDisciplineID(), model.getCoach());
    }
 }

@@ -2,7 +2,7 @@ package swimC.coach.views;
 
 public class MemberView {
    public void printMemberDetails(int MemberID, String MemberFirstName, String MemberLastName, String MemberEmail, String MemberMobile, 
-                                   int MemberAge, boolean MemberStatus, boolean MemberType, int MemberDiscipline, 
+                                   int MemberAge, boolean MemberStatus, boolean MemberType,
                                    int MemberFees, boolean MemberBehind)                                
    {  
       System.out.println("Swimmer ID: " + MemberID);
@@ -13,7 +13,6 @@ public class MemberView {
       System.out.println("Age: " + MemberAge);
       System.out.println("Is Member Active: " + MemberStatus);
       System.out.println("Is Member Elite: " + MemberType);
-      System.out.println("Discipline: " + MemberDiscipline);
       System.out.println("Fees: " + MemberFees);
       System.out.println("Behind: " + MemberBehind);
       System.out.println("--------------------------------");                                       
