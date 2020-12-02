@@ -1,6 +1,5 @@
 package swimC.coach.models;
 
-import java.util.Date;
 
 public class Result {
    private int id;
@@ -8,6 +7,7 @@ public class Result {
    private int disciplineID;
    private int rally;
    private double time;
+   private String date;
    
    public int getID() {
       return id;
@@ -38,5 +38,11 @@ public class Result {
    }
    public void setTime(double i) {
       this.time = i;
+   }
+   public String getDate() {
+      return date;
+   }
+   public void setString(String s) {
+      this.date = s;
    }
 }

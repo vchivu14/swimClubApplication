@@ -7,11 +7,12 @@ import java.util.*;
 
 public class exe {
 
-   public static void main(String[] args) throws FileNotFoundException {
+   static Scanner user;
+   public static void main(String[] args) throws IOException {
       
       boolean start = true;
       while (start) {
-      Scanner user = new Scanner(System.in);
+      user = new Scanner(System.in);
       System.out.println("Choose a user: ");
       System.out.println("<1> for Chairman, <2> for Treasurer, <3> for Coach");
       System.out.println("<0> for Exit");
@@ -40,7 +41,6 @@ public class exe {
       }
       
       }
-      
  
    }
 }

@@ -1,1 +1,1 @@
-1 King Ragnar 20 4444555 gm true false 1600 false
+1 King Ragnar 18 4445556 gm true true 1000 false

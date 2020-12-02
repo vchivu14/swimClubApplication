@@ -1,8 +1,8 @@
-package swimC.coach.interfaces;
+package swimC.coach.views;
 
 import java.util.Scanner;
 
-public class Coach {
+public class CoachView {
    static Scanner answer;
    static int option;
    static String optionMenu;
@@ -61,5 +61,4 @@ public class Coach {
       return optionMenu;   
    }
          
-
 }
