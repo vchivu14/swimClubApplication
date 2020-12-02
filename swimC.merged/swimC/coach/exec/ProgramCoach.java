@@ -297,12 +297,11 @@ public class ProgramCoach {
                 controller = new SwimmerController(model, view);
                 controller.updateView();
             }
+            int swimmerID = CoachView.chooseSwimmer();
             if (swimmers.size() > 0) {
-                int swimmerID = CoachView.chooseSwimmer();
-
                 if (swimmerID == 0) {
                     System.out.println();
-                    System.out.println("And Back");
+                    System.out.println("Now going back...");
                     break;
                 } else if (swimmerID <= swimmers.size()) {
                     try {
@@ -313,31 +312,29 @@ public class ProgramCoach {
                         System.out.println("No Swimmer by that ID..");
                         break;
                     }
+                    
+                    int disciplineID; 
                     boolean change = false;
                     while (!change) {
                         showDisciplines();
-                        boolean disciplineVerified;
-                        int disciplineID = CoachView.chooseDiscipline();
-
-                        try {
-                            disciplineVerified = verifyIDDiscipline(disciplineID);
-                        } catch (Exception e) {
-                            System.out.println("No Discipline by that ID..");
-                            break;
+                        disciplineID = CoachView.chooseDiscipline();
+                        if (disciplineID == 0) {
+                           System.out.println();
+                           System.out.println("Now going back...");
+                           break;
                         }
-
-                        if (disciplineVerified) {
-                            controller.setSwimmerDiscipline(disciplineID);
-                            System.out.println("Swimmer's Discipline has been changed.");
-                            controller.updateView();
-                        } else {
-                            System.out.println("No Discipline found!");
-                            break;
+                        else if (disciplineID <= disciplines.size() && verifyIDDiscipline(disciplineID)) {
+                           controller.setSwimmerDiscipline(disciplineID);
+                           controller.updateView();
+                        }
+                        else {
+                           System.out.println("No Discipline found!");
+                           break;
                         }
 
                         saveChages(filepath, controller, disciplineID);
-
                         change = true;
+                        
                         if (change) {
                             continue;
                         } else {
@@ -426,9 +423,13 @@ public class ProgramCoach {
                         break;
                     }
                 } else {
-                    System.out.println("No competitions here!");
+                    System.out.println("No competitions found!");
                     break;
                 }
+            }
+            else {
+               System.out.println("No competitions here!");
+               break;
             }
         }
     }
