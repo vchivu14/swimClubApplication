@@ -14,6 +14,7 @@ public class Member {
    private int fees;
    private boolean behind = false;
    
+   // this is the Member model the base file for our database
    public Member() {
       this.id = no;
       no++;
@@ -22,6 +23,9 @@ public class Member {
    public void controlFees() {
       this.fees = determineFee();
    }
+   
+   //this is a function that determines by the data input what is the ammount of fee the member has to pay
+   // a separate setFee method applies when asking if the member is active or passive.
    public int determineFee() {
       int fees = 1000;
       if (age > 18) {

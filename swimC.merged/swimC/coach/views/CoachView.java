@@ -22,6 +22,7 @@ public class CoachView {
          option = answer.nextInt();
       }
       catch (Exception e) {
+         option = -1;
          System.out.println("Not a working option!");
          System.out.println("Starting again!");
       } 
@@ -38,20 +39,14 @@ public class CoachView {
          option = answer.nextInt();
       }
       catch (Exception e) {
-         System.out.println("...");
-         System.out.println("Not a real option!");
-      }
-      if (option == (int) option) {
-         System.out.println();
-      } else {
          option = -1;
+         System.out.println("...");
       }
       return option;    
    }
    
    public static int chooseSwimmer() {
       answer = new Scanner(System.in);
-      System.out.println();
       System.out.println("Would you like to Assign a discipline for a specific Swimmer?");
       System.out.println("type the ID of one of the Swimmers listed above: ");
       System.out.println("Or <0> to exit: ");
@@ -59,20 +54,14 @@ public class CoachView {
          option = answer.nextInt();
       }
       catch (Exception e) {
-         System.out.println("...");
-         System.out.println("Not a real option!");
-      }
-      if (option == (int) option) {
-         System.out.println();
-      } else {
          option = -1;
+         System.out.println("...");
       }
       return option;   
    }
    
    public static int chooseDiscipline() {
       answer = new Scanner(System.in);
-      System.out.println();
       System.out.println("What Discipline you want to Assign to this Swimmer?");
       System.out.println("type the ID of one the Disciplines listed above: ");
       System.out.println("Or <0> to exit: ");
@@ -80,13 +69,8 @@ public class CoachView {
          option = answer.nextInt();
       }
       catch (Exception e) {
+         option = -1; 
          System.out.println("...");
-         System.out.println("Not a real option!");
-      }
-      if (option == (int) option) {
-         System.out.println();
-      } else {
-         option = -1;
       }
       return option;     
    }
