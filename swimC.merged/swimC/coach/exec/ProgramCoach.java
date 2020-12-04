@@ -23,9 +23,9 @@ public class ProgramCoach {
     private static CompetitionResult competitionResult;
     private static ArrayList<CompetitionResult> competitionResults;
 
-    static Scanner x;
+    private static Scanner x;
     private static boolean program;
-    static Scanner what;
+    private static Scanner what;
 
     public static void editRecord(String filepath, int swimmerID, int newDiscipline) {
         String tempFile = "temp.txt";
@@ -168,7 +168,7 @@ public class ProgramCoach {
         }
         return status;
     }
-    
+
     private static boolean verifyIDSwimmer(int swimmerID) {
         boolean status = false;
         for (int i = 0; i < swimmers.size(); i++) {
@@ -212,17 +212,22 @@ public class ProgramCoach {
         competitionResult = competitionResults.get(i);
         return competitionResult;
     }
-    
+
     private static Discipline retrieveDiscipline(int i) {
         discipline = disciplines.get(i);
         return discipline;
     }
-    
+
     private static Member retrieveMember(int i) {
         member = members.get(i);
         return member;
     }
     
+    private static Swimmer retrieveSwimmer(int i) {
+        swimmer = swimmers.get(i);
+        return swimmer;
+    }
+
     private static Competition retrieveCompetition(int i) {
         competition = competitions.get(i);
         return competition;
@@ -247,16 +252,16 @@ public class ProgramCoach {
             controller.updateView();
         }
     }
-    
+
     public static void showSwimmers() {
-      Swimmer model;
-            SwimmerView view = new SwimmerView();
-            SwimmerController controller;
-            for (int i = 0; i < swimmers.size(); i++) {
-                model = retrieveSwimmerFromDatabase(i);
-                controller = new SwimmerController(model, view);
-                controller.updateView();
-            }
+        Swimmer model;
+        SwimmerView view = new SwimmerView();
+        SwimmerController controller;
+        for (int i = 0; i < swimmers.size(); i++) {
+            model = retrieveSwimmer(i);
+            controller = new SwimmerController(model, view);
+            controller.updateView();
+        }
     }
 
     public static void showMembers() {
@@ -291,106 +296,115 @@ public class ProgramCoach {
         if (optionSave.toLowerCase().equals("y")) {
             editRecord(filepath, controller.getSwimmerID(), disciplineID);
             System.out.println("Changes saved!");
+            System.out.println();
         } else if (optionSave.toLowerCase().equals("n")) {
             clear();
             exec();
             System.out.println("Changes reverted!");
+            System.out.println();
         } else {
             clear();
             exec();
             System.out.println("Not a real Option!");
+            System.out.println();
         }
     }
-   
+
     static int swimmerID;
     static int competitionID;
-   
+
     public static void manageSwimmer() {
         boolean finding = false;
         while (!finding) {
-                  
-            
-            
+
             if (swimmers.size() > 0) {
-            
-            Swimmer model;
-            SwimmerView view = new SwimmerView();
-            SwimmerController controller;
-            for (int i = 0; i < swimmers.size(); i++) {
-                model = retrieveSwimmerFromDatabase(i);
-                controller = new SwimmerController(model, view);
-                controller.updateView();
-            }
-            swimmerID = CoachView.chooseSwimmer();
-               
+                Swimmer model;
+                SwimmerView view = new SwimmerView();
+                SwimmerController controller;
+                for (int i = 0; i < swimmers.size(); i++) {
+                    model = retrieveSwimmerFromDatabase(i);
+                    controller = new SwimmerController(model, view);
+                    controller.updateView();
+                }
+                System.out.println();
+                swimmerID = CoachView.chooseSwimmer();
+                System.out.println();
                 if (swimmerID == 0) {
                     System.out.println();
                     System.out.println("Now going back...");
-                    break;
-                } else if (swimmerID != -1 && swimmerID <= swimmers.size())  {
-                    try {
-                        model = retrieveSwimmerFromDatabase(swimmerID);
-                        controller = new SwimmerController(model, view);
-                        controller.updateView();
-                    } catch (Exception e) {
-                        break;
-                    }
-                    
-                    int disciplineID; 
-                    boolean change = false;
-                    while (!change) {
-                        showDisciplines();
-                        disciplineID = CoachView.chooseDiscipline();
-                        if (disciplineID == 0) {
-                           System.out.println();
-                           System.out.println("Now going back...");
-                           break;
-                        }
-                        else if (disciplineID != -1 && disciplineID <= disciplines.size()) {
-                           controller.setSwimmerDiscipline(disciplineID);
-                           controller.updateView();
-                        }
-                        else if (disciplineID == -1) {
-                           System.out.println("Something went wrong!");
-                    System.out.println("----------------------");
-                    System.out.println("Let's try again!");
                     System.out.println();
-                        }
-                        else {
-                           System.out.println("No Discipline found!");
-                           break;
-                        }
-
-                        saveChages(filepath, controller, disciplineID);
-                        change = true;
-                        
-                        if (change) {
-                            continue;
-                        } else {
-                            System.out.println("Not Found...");
-                        }
-                        break;
-                    }
-                    System.out.println("Try with other Swimmer?");
-                    System.out.println("<y> for Yes, <n> for No");
-                    what = new Scanner(System.in);
-                    if (what.next().toLowerCase().equals("y")) {
-                        save();
-                        continue;
-                    } else {
-                        break;
-                    }
-                } 
-                else if (swimmerID == -1) {
+                    break;
+                } else if (swimmerID == -1) {
                     System.out.println("Something went wrong!");
                     System.out.println("----------------------");
                     System.out.println("Let's try again!");
                     System.out.println();
-                    continue;
                 }
-                else {
+                else if (swimmerID != -1 && swimmerID <= swimmers.size()) {
+                    model = retrieveSwimmerFromDatabase(swimmerID);
+                    controller = new SwimmerController(model, view);
+                    controller.updateView();
+                    
+                    int tries = 3;
+                    int disciplineID;
+                    boolean change = false;
+                    while (!change) {
+                        if (tries == 0) {
+                           System.out.println("Too many wrong inputs");
+                           System.out.println("Now going back...");
+                           break;  
+                        } 
+                        showDisciplines();
+                        System.out.println();
+                        disciplineID = CoachView.chooseDiscipline();
+                        
+                        if (disciplineID == -1 && tries >= 1) {
+                            System.out.println("Something went wrong!");
+                            System.out.println("----------------------");
+                            System.out.println("Let's try again!");
+                            tries--;
+                        } else if (disciplineID == 0) {
+                            System.out.println();
+                            System.out.println("Now going back...");
+                            System.out.println();
+                            break;
+                        } else if (disciplineID != -1 && disciplineID <= disciplines.size()) {
+                            controller.setSwimmerDiscipline(disciplineID);
+                            controller.updateView();
+                            saveChages(filepath, controller, disciplineID);
+                            change = true;
+                        } else if (disciplineID != -1 && disciplineID > disciplines.size()) {
+                            System.out.println();
+                            System.out.println("No Discipline found!");
+                            System.out.println();
+                            tries--;
+                        }
+
+                        if (change) {
+                           System.out.println("Try with other Swimmer?");
+                           System.out.println("<y> for Yes, <n> for No");
+                           System.out.println();
+                           what = new Scanner(System.in);
+                           if (what.next().toLowerCase().equals("y")) {
+                              save();
+                              continue;
+                           } else {
+                              break;
+                           }
+                        } else if (!change && tries > 0) {
+                            System.out.println("You still have: " + tries + " more tries");
+                            System.out.println();
+                        } else if (!change && tries <= 0) {
+                            System.out.println();
+                            System.out.println("Nothing solved");
+                            System.out.println();
+                            break;
+                        }
+                    }
+                    break;
+                } else {
                     System.out.println("No Swimmer by that ID..");
-                    System.out.println(); 
+                    System.out.println();
                 }
             } else {
                 System.out.println("No Swimmers here...");
@@ -402,34 +416,31 @@ public class ProgramCoach {
     public static void manageCompetitions() {
         boolean start = false;
         while (!start) {
-            Competition model;
-            CompetitionView view = new CompetitionView();
-            CompetitionController controllerC;
-            for (int i = 0; i < competitions.size(); i++) {
-                model = retrieveCompetition(i);
-                controllerC = new CompetitionController(model, view);
-                controllerC.updateView();
-            }
-
-            if (disciplines.size() > 0) {
-                competitionID = CoachView.chooseCompetition();
-                
-                if (competitionID == 0) {
+            
+            if (competitions.size() > 0) {
+               Competition model;
+               CompetitionView view = new CompetitionView();
+               CompetitionController controllerC;
+               for (int i = 0; i < competitions.size(); i++) {
+                  model = retrieveCompetition(i);
+                  controllerC = new CompetitionController(model, view);
+                  controllerC.updateView();
+               }
+               competitionID = CoachView.chooseCompetition();
+               System.out.println();
+               if (competitionID == 0) {
+                  System.out.println();
+                  System.out.println("Now going back...");
+                  break;
+               } else if (competitionID == -1) {
+                    System.out.println("Something went wrong!");
+                    System.out.println("----------------------");
+                    System.out.println("Let's try again!");
                     System.out.println();
-                    System.out.println("Now going back...");
-                    break;
-                } 
-
-                if (competitionID <= competitions.size() && competitionID != -1) {
-
-                    try {
-                        model = retrieveCompetitionFromDatabase(competitionID);
-                        controllerC = new CompetitionController(model, view);
-                        controllerC.updateView();
-                    } catch (Exception e) {
-                        
-                        break;
-                    }
+               } else if (competitionID != -1 && competitionID <= competitions.size()) {
+                    model = retrieveCompetitionFromDatabase(competitionID);
+                    controllerC = new CompetitionController(model, view);
+                    controllerC.updateView();
 
                     boolean foundCompetitionList = false;
                     while (!foundCompetitionList) {
@@ -450,11 +461,12 @@ public class ProgramCoach {
                         if (foundCompetitionList) {
                             continue;
                         } else {
+                            System.out.println();
                             System.out.println("No Competition List Found...");
                             System.out.println();
                         }
                         break;
-                    }
+                    }  
                     System.out.println("Try with other competition?");
                     System.out.println("<y> for Yes, <n> for No");
                     what = new Scanner(System.in);
@@ -463,23 +475,14 @@ public class ProgramCoach {
                     } else {
                         break;
                     }
-                }
-                else if (competitionID == -1) {
-                  System.out.println("Something went wrong!");
-                    System.out.println("----------------------");
-                    System.out.println("Let's try again!");
+                } else {
+                    System.out.println("No Competition by that ID..");
                     System.out.println();
                     continue;
-                } 
-                else {
-                  System.out.println("No Competition by that ID..");
-                  System.out.println();
-                   continue; 
                 }
-            }
-            else {
-               System.out.println("No competitions here!");
-               break;
+            } else {
+                System.out.println("No competitions here!");
+                break;
             }
         }
     }
@@ -505,9 +508,9 @@ public class ProgramCoach {
             controller.updateView();
         }
     }
-   
+
     private static int option;
-   
+
     public static void menu() {
         exec();
 
@@ -516,37 +519,29 @@ public class ProgramCoach {
 
             if (option == 1) {
                 showMembers();
-            }
-
-            else if (option == 2) {
+            } else if (option == 2) {
                 manageSwimmer();
-            }
-
-            else if (option == 3) {
+            } else if (option == 3) {
                 showDisciplines();
-            }
-
-            else if (option == 4) {
+            } else if (option == 4) {
                 manageCompetitions();
-            }
-
-            else if (option == 5) {
+            } else if (option == 5) {
                 showTrainingResults();
-            }
-
-            else if (option == 6) {
+            } else if (option == 6) {
                 showCompetitionResults();
-            }
-
-            else if (option == 0) {
+            } else if (option == 0) {
                 System.out.println();
-                System.out.println("Goodbye");
+                System.out.println("See you next time!");
+                System.out.println();
                 break;
-            } else {
-                System.out.println("No selection made");
+            } else if (option == -1) {
                 continue;
+            } else {
+               System.out.println();
+               System.out.println("No selection made");
+               System.out.println();
+               continue;
             }
         }
-
     }
 }
