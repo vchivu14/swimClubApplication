@@ -26,7 +26,9 @@ public class ProgramCoach {
     private static Scanner x;
     private static boolean program;
     private static Scanner what;
-
+    
+    // this function will take the parameters given, create a temp file with all the new edits
+    //   and rename it at the end
     public static void editRecord(String filepath, int swimmerID, int newDiscipline) {
         String tempFile = "temp.txt";
         File oldFile = new File(filepath);
@@ -99,7 +101,9 @@ public class ProgramCoach {
     public static ArrayList<CompetitionResult> getCompetitionResultsLists() {
         return competitionResults;
     }
-
+    
+    // this function will take the ArrayLists that were modified by methods in this class
+    //   and populate them with the new values
     private static void save() {
         swimmers = getSwimmers();
         members = getMembers();
@@ -119,7 +123,9 @@ public class ProgramCoach {
         trainingResults.clear();
         competitionResults.clear();
     }
-
+    
+    // this function will trigger a method in Storage Class that will read the .txt files and
+    //   place them in the ArrayLists of this class
     private static void exec() {
         Storage.connectD();
         swimmers = Storage.getSwimmers();
@@ -130,7 +136,8 @@ public class ProgramCoach {
         trainingResults = Storage.getTrainingResultsLists();
         competitionResults = Storage.getCompetitionResultsLists();
     }
-
+    
+    // this function will retrieve a model of a Swimmer based on a given ID from the ArrayList that holds them
     private static Swimmer retrieveSwimmerFromDatabase(int swimmerID) {
         for (int i = 0; i < swimmers.size(); i++) {
             swimmer = swimmers.get(i);
@@ -154,7 +161,8 @@ public class ProgramCoach {
         }
         return competition;
     }
-
+    
+    // this function will verify in our database if there is any discipline with the given ID
     private static boolean verifyIDDiscipline(int disciplineID) {
         boolean status = false;
         for (int i = 0; i < disciplines.size(); i++) {
@@ -197,7 +205,8 @@ public class ProgramCoach {
         }
         return status;
     }
-
+    
+    // these functions will help us retrieve one by one the models stored in the ArrayLists one by one
     public static CompetitionList retrieveCompetitionList(int i) {
         competitionList = competitionLists.get(i);
         return competitionList;
@@ -232,7 +241,8 @@ public class ProgramCoach {
         competition = competitions.get(i);
         return competition;
     }
-
+    
+    // this is a static method that will trigger our Main Menu to start executing
     public static void ON() {
         program = true;
         menu();
@@ -241,7 +251,8 @@ public class ProgramCoach {
     public static void OFF() {
         program = false;
     }
-
+    
+    // these following functions will print all the models from the ArrayLists for a specific Class Model
     public static void showDisciplines() {
         Discipline model;
         DisciplineView view = new DisciplineView();
@@ -288,9 +299,10 @@ public class ProgramCoach {
             }
         }
     }
-
+    
+    // this function will trigger a view that will ask the user if he wants to save the changes
+    //   by calling the editRecord method if needed
     private static String filepath = "swimmers.txt";
-
     public static void saveChages(String filepath, SwimmerController controller, int disciplineID) {
         String optionSave = CoachView.saveChanges();
         if (optionSave.toLowerCase().equals("y")) {
@@ -311,8 +323,7 @@ public class ProgramCoach {
     }
 
     static int swimmerID;
-    static int competitionID;
-
+    // this is the logic which is used to assign new disciplines to swimmers
     public static void manageSwimmer() {
         boolean finding = false;
         while (!finding) {
@@ -412,7 +423,9 @@ public class ProgramCoach {
             }
         }
     }
-
+    
+    static int competitionID;
+    // this will be the logic that will manage competitions and competitions lists
     public static void manageCompetitions() {
         boolean start = false;
         while (!start) {
@@ -510,7 +523,7 @@ public class ProgramCoach {
     }
 
     private static int option;
-
+    // here based on a choice received from the user the main menu will trigger one of the functions
     public static void menu() {
         exec();
 

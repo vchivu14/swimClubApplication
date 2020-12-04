@@ -6,7 +6,8 @@ import java.util.*;
 import java.io.*;
 
 public class Storage {
-
+   
+   // we create the variables and ArrayLists that will help us retrieve data from files
    private static Member member;
    private static ArrayList<Member> members = new ArrayList<Member>();
    private static Swimmer swimmer;
@@ -61,7 +62,8 @@ public class Storage {
    private static File filepathTrainingResults = new File("./trainingResults.txt");
    private static File filepathCompetitionResults = new File("./competitionResults.txt");
  
-
+   // this function will start reading from each of the above files the records they keep
+   //    this function will be used in the Coach Program
    public static void connectD() {
       try {
          inputMS = new Scanner(filepathMembers);
