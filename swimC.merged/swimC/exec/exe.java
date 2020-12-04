@@ -31,46 +31,38 @@ public class exe {
       boolean start = true;
       while (start) {
       
-      if (tries == 0) {
-         System.out.println("Too many tries!");
-         break;  
-      }
-      option  = chooseOption();
+         if (tries == 0) {
+            System.out.println("Too many tries!");
+            break;  
+         }
+         
+         option  = chooseOption();
       
-      if (option == 1) {
-         ChairmanControler c = new ChairmanControler();
-         c.chairman();
+         if (option == 1) {
+            ChairmanControler c = new ChairmanControler();
+            c.chairman();
+         } else if (option == 2) {
+            System.out.println("Thunderstruck!!");
+         } else if (option == 3) {
+            ProgramCoach.ON();
+         } else if (option == 0) {
+            System.out.println();
+            System.out.println("Goodbye");
+            break;
+         } else if (option == -1) {
+            System.out.println("Something went wrong!");
+            System.out.println("----------------------");
+            System.out.println("Let's try again!");
+            System.out.println();
+            tries--;
+            continue;
+         } else {
+            System.out.println("Please enter one of the following");
+            System.out.println("----------------------");
+            System.out.println();
+            tries--;
+            continue;
+         }
       }
-      
-      else if (option == 2) {
-         System.out.println("Thunderstruck!!");
-      }
-      
-      else if (option == 3) {
-         ProgramCoach.ON();
-      }
-      else if (option == 0) {
-         System.out.println();
-         System.out.println("Goodbye");
-         break;
-      }
-      else if (option == -1) {
-         System.out.println("Something went wrong!");
-                            System.out.println("----------------------");
-                            System.out.println("Let's try again!");
-                            System.out.println();
-                            tries--;
-                            continue;
-      } else {
-         System.out.println("Please enter one of the following");
-                            System.out.println("----------------------");
-                            System.out.println();
-                            tries--;
-                            continue;
-      
-      }
-      
-      }
- 
    }
 }
