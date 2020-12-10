@@ -161,50 +161,7 @@ public class ProgramCoach {
         }
         return competition;
     }
-    
-    // this function will verify in our database if there is any discipline with the given ID
-    private static boolean verifyIDDiscipline(int disciplineID) {
-        boolean status = false;
-        for (int i = 0; i < disciplines.size(); i++) {
-            discipline = disciplines.get(i);
-            if (discipline.getID() == disciplineID) {
-                status = true;
-                break;
-            } else {
-                continue;
-            }
-        }
-        return status;
-    }
 
-    private static boolean verifyIDSwimmer(int swimmerID) {
-        boolean status = false;
-        for (int i = 0; i < swimmers.size(); i++) {
-            swimmer = swimmers.get(i);
-            if (swimmer.getID() == swimmerID) {
-                status = true;
-                break;
-            } else {
-                continue;
-            }
-        }
-        return status;
-    }
-
-    private static boolean verifyCompetitionList(int competitionID) {
-        boolean status = false;
-        for (int i = 0; i < competitionLists.size(); i++) {
-            competitionList = competitionLists.get(i);
-            int competitionListID = competitionList.getCompetitionID();
-            if (competitionListID == competitionID) {
-                status = true;
-                break;
-            } else {
-                continue;
-            }
-        }
-        return status;
-    }
     
     // these functions will help us retrieve one by one the models stored in the ArrayLists one by one
     public static CompetitionList retrieveCompetitionList(int i) {
